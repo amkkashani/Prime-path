@@ -25,7 +25,6 @@ def main():
             print(path)
 
 
-
 # this code is not popular dfs :)
 # its custom dfs for finding all the ways
 def removeSubpaths():
@@ -33,10 +32,11 @@ def removeSubpaths():
     while i < len(results):
         j = 0
         while j < len(results):
-            if i >= j :
-                j +=1
+            if i >= j:
+                j += 1
                 continue
-            if checkItsSubpath(results[i],results[j]):# deletion during iterations caueses  the complexity inside this block
+            if checkItsSubpath(results[i],
+                               results[j]):  # deletion during iterations caueses  the complexity inside this block
                 if len(results[i].passed) > len(results[j].passed):
                     results.remove(results[j])
                     if j < i:
@@ -48,28 +48,13 @@ def removeSubpaths():
                 else:
                     results.remove(results[i])
                     if i < j:
-                        j-=1
-                        i-=1
+                        j -= 1
+                        i -= 1
                     else:
-                        i-=1
+                        i -= 1
                     break  # we change the main element and must break
-            j +=1
-        i+=1
-def removeSubpaths2():
-    i = 0
-    j = 0
-    for i in results:
-        for j in results:
-            if i == j:
-                continue
-            if checkItsSubpath(i,j):
-                if len(i.passed) > len(j.passed):
-                    results.remove(j)
-                else:
-                    results.remove(i)
-
-
-
+            j += 1
+        i += 1
 
 
 def checkItsSubpath(path1, path2):
@@ -81,19 +66,6 @@ def checkItsSubpath(path1, path2):
         listLit = listBig
         listBig = temp
 
-    for i in range(len(listBig)):
-        isSubpath = True
-        for j in range(len(listLit)):
-            if i + j > len(listBig) - 1 or listBig[i + j] != listLit[j]:
-                isSubpath = False
-                break
-        if isSubpath:
-            return True
-    return False
-
-def test():
-    listBig = [0,1,3,4]
-    listLit = [1,3]
     for i in range(len(listBig)):
         isSubpath = True
         for j in range(len(listLit)):
@@ -155,9 +127,9 @@ class path:
                 newPath.passed.append(nodeNumber)
                 newPath.collection.add(nodeNumber)
                 self.haveChild = True
-                return False, newPath
+                return False, newPath # loop with same node in start and end
             else:
-                return False, None
+                return False, None # loop (unwanted)
         else:
             newPath = path()
             newPath.passed = self.passed.copy()
